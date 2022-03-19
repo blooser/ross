@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.14)
+
+project(ross VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_AUTO_UIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(ross)
+
+install(TARGETS ross ${INSTALL_TARGETS_DEFAULT_ARGS})
