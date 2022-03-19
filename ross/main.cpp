@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "paths.h"
+
 
 int main(int argc, char *argv[]) {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -13,7 +15,12 @@ int main(int argc, char *argv[]) {
     app.setOrganizationName(ORGANIZATION_NAME);
     app.setOrganizationDomain(ORGANIZATION_DOMAIN);
 
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:///RossStyles.qml")), "ross.styles", 0, 1, "RossStyles");
+
     QQmlApplicationEngine engine;
+
+    Paths m_paths;
+    engine.rootContext()->setContextProperty("paths", &m_paths);
 
     const QUrl url(QStringLiteral("qrc:///main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

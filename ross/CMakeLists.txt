@@ -4,6 +4,14 @@ find_package(Qt5QuickCompiler)
 set(QRC_FILES
     qml/qml.qrc)
 
+set(MODEL_FILES
+    model/pathmodel.h
+    model/pathmodel.cpp
+    model/eventmodel.h
+    model/eventmodel.cpp)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/model)
+
 add_definitions(-DPROJECT_NAME="Ross"
                 -DPROJECT_DESC="Advanced Files Watching"
                 -DVERSION="0.1"
@@ -11,7 +19,7 @@ add_definitions(-DPROJECT_NAME="Ross"
                 -DORGANIZATION_DOMAIN="https://github.com/blooser"
                 )
 
-add_executable(ross main.cpp ${QRC_FILES})
+add_executable(ross main.cpp paths.h paths.cpp ${MODEL_FILES} ${QRC_FILES})
 
 target_link_libraries(ross
                       Qt5::Core
