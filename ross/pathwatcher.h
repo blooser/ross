@@ -28,6 +28,7 @@ private slots:
 
 protected:
     void scanCreated(QList<QFileInfo> files);
+    void scanDeleted(QList<QFileInfo> files);
 
 private:
     QString m_path;

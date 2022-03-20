@@ -27,6 +27,7 @@ void FolderChanges::scanDirectory(const QString &path) {
     const auto files = QDir(path).entryInfoList(QDir::Files);
 
     scanCreated(files);
+    scanDeleted(files);
 }
 
 void FolderChanges::scanCreated(QList<QFileInfo> files) {
@@ -35,6 +36,16 @@ void FolderChanges::scanCreated(QList<QFileInfo> files) {
             emit newEvent(EventModel::EventModelItem("Created", file.absoluteFilePath(), false));
 
             m_files.append(file);
+        }
+    }
+}
+
+void FolderChanges::scanDeleted(QList<QFileInfo> files) {
+    for (const auto &file : qAsConst(m_files)) {
+        if (!files.contains(file)) {
+            emit newEvent(EventModel::EventModelItem("Deleted", file.absoluteFilePath(), false));
+
+            m_files.removeOne(file);
         }
     }
 }
