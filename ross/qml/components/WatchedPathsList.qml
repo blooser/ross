@@ -17,7 +17,6 @@ Rectangle {
     border {
         width: 1
         color: RossStyles.activeColor
-
     }
 
     color: "transparent"

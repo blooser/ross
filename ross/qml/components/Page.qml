@@ -31,5 +31,11 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
+
+        EventTable {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
 }
