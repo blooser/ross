@@ -40,7 +40,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            model: paths.watching
+            model: paths.watched
             spacing: 5
 
             delegate: WatchedPathListItem {

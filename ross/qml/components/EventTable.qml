@@ -51,6 +51,7 @@ Rectangle {
 
             delegate: Items.RText {
                 text: header.headers(column)
+                font.bold: true
             }
         }
 

@@ -17,21 +17,27 @@ Q_DECLARE_LOGGING_CATEGORY(paths)
 
 class Paths : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QObject* watching READ watching NOTIFY watchingChanged)
+    Q_PROPERTY(QObject* watched READ watched NOTIFY watchedChanged)
     Q_PROPERTY(QObject* events READ events NOTIFY eventsChanged)
+    Q_PROPERTY(bool watching READ watching WRITE setWatching NOTIFY watchingChanged)
+
 
 public:
     Paths(QObject *parent=nullptr);
 
-    QObject* watching();
+    QObject* watched();
     QObject* events();
+
+    bool watching();
+    void setWatching(const bool);
 
     Q_INVOKABLE void watch(const QString &url);
     Q_INVOKABLE void unwatch(const QString& url);
 
 signals:
-    void watchingChanged(QObject*);
+    void watchedChanged(QObject*);
     void eventsChanged(QObject*);
+    void watchingChanged(bool);
 
 private slots:
     void handleEvent(const EventModel::EventModelItem&);
@@ -39,6 +45,7 @@ private slots:
 private:
     PathModel m_pathModel;
     EventModel m_eventModel;
+    bool m_watching;
 
     std::vector<std::unique_ptr<FolderChanges>> m_watchers;
 };

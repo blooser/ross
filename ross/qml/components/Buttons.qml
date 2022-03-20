@@ -31,12 +31,10 @@ Item {
             onClicked: root.clear()
         }
 
-        Items.RButton {
+        SwitchButton {
             Layout.preferredWidth: 75
 
-            text: "Start"
-
-            onClicked: root.start()
+            onSwitched: paths.watching = active
         }
     }
 }

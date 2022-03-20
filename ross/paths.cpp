@@ -17,7 +17,8 @@ struct clean_path {
 
 
 Paths::Paths(QObject *parent)
-    : QObject(parent) {
+    : QObject(parent),
+      m_watching(false) {
 
 }
 
@@ -61,11 +62,16 @@ void Paths::unwatch(const QString &url) {
     qCInfo(paths) << "Unwatching" << clean.path;
 }
 
-QObject* Paths::watching() {
+QObject* Paths::watched() {
     return &m_pathModel;
 }
 
 void Paths::handleEvent(const EventModel::EventModelItem &event) {
+    if (not m_watching) {
+        // NOTE: Block all events
+        return;
+    }
+
     qCInfo(paths) << "new event";
 
     m_eventModel.insert(event);
@@ -73,6 +79,19 @@ void Paths::handleEvent(const EventModel::EventModelItem &event) {
 
 QObject* Paths::events() {
     return &m_eventModel;
+}
+
+bool Paths::watching() {
+    return m_watching;
+}
+
+void Paths::setWatching(const bool newWatching) {
+    if (m_watching == newWatching) {
+        return;
+    }
+
+    m_watching = newWatching;
+    emit watchingChanged(m_watching);
 }
 
 

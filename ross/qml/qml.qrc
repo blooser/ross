@@ -13,5 +13,6 @@
         <file>components/EventTableItem.qml</file>
         <file>components/Buttons.qml</file>
         <file>components/Header.qml</file>
+        <file>components/SwitchButton.qml</file>
     </qresource>
 </RCC>
