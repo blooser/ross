@@ -17,13 +17,12 @@ Item {
 
         anchors.fill: parent
 
-        spacing: 5
+        spacing: 20
 
         PathButton {
             Layout.alignment: Qt.AlignHCenter
 
             onPathSelected: paths.watch(path)
-
         }
 
         WatchedPathsList {

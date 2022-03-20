@@ -42,5 +42,5 @@ void PathModel::remove(const QString &path) {
     m_paths.removeAt(row);
     endRemoveRows();
 
-     qCInfo(pathModel) << "Removed path -" << "paths:" << rowCount();
+    qCInfo(pathModel) << "Removed path -" << "paths:" << rowCount();
 }

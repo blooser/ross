@@ -10,5 +10,6 @@
         <file>components/WatchedPathsList.qml</file>
         <file>components/WatchedPathListItem.qml</file>
         <file>components/EventTable.qml</file>
+        <file>components/EventTableItem.qml</file>
     </qresource>
 </RCC>

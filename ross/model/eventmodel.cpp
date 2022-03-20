@@ -1,10 +1,13 @@
 #include "eventmodel.h"
 
+Q_LOGGING_CATEGORY(eventModel, "event.model")
+
 const QHash<int, QByteArray> EventModel::ROLE_NAMES = {
     { Column::Event, QByteArrayLiteral("event") },
     { Column::Path, QByteArrayLiteral("path") },
     { Column::Folder, QByteArrayLiteral("folder") },
     { Column::DateTime, QByteArrayLiteral("datetime") },
+    { Qt::DisplayRole, QByteArrayLiteral("display") }
 };
 
 EventModel::EventModel(QObject *parent)
@@ -41,11 +44,21 @@ QVariant EventModel::data(const QModelIndex &index, int role) const {
             return item.folder;
         case Column::DateTime:
             return item.dateTime;
+        case Qt::DisplayRole:
+            return item[Qt::UserRole + 1 + index.column()];
         default:
             return QVariant();
 
     }
 
     return QVariant();
+}
+
+void EventModel::insert(const EventModelItem &item) {
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_events.append(item);
+    endInsertRows();
+
+    qCInfo(eventModel) << "Inserted event -" << "events:" << rowCount();
 }
 

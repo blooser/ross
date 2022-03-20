@@ -57,6 +57,13 @@ QObject* Paths::watching() {
 
 void Paths::handleFileChanged(const QString &path) {
     qCInfo(paths) << path << "changed";
+
+    m_eventModel.insert(EventModel::EventModelItem{
+                            "created",
+                            path,
+                            true,
+                            QDateTime::currentDateTime()
+                        });
 }
 
 QObject* Paths::events() {
