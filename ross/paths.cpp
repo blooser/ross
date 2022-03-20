@@ -9,6 +9,8 @@ Q_LOGGING_CATEGORY(paths, "paths");
 Paths::Paths(QObject *parent)
     : QObject(parent) {
 
+    connect(&m_watcher, &QFileSystemWatcher::directoryChanged,
+            this, &Paths::handleFileChanged);
 }
 
 struct clean_path {
@@ -51,6 +53,14 @@ void Paths::unwatch(const QString &url) {
 
 QObject* Paths::watching() {
     return &m_pathModel;
+}
+
+void Paths::handleFileChanged(const QString &path) {
+    qCInfo(paths) << path << "changed";
+}
+
+QObject* Paths::events() {
+    return &m_eventModel;
 }
 
 
