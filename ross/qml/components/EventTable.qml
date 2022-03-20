@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Qt.labs.qmlmodels 1.0
 
@@ -38,6 +39,23 @@ Rectangle {
             text: "Events"
         }
 
+        HorizontalHeaderView {
+            id: header
+
+            Layout.fillWidth: true
+
+            syncView: table
+            model: paths.events
+
+            readonly property var headers: (column) => {
+                return ["Event", "Path", "Folder", "Timestamp"][column]
+            }
+
+            delegate: Items.RText {
+                text: header.headers(column)
+            }
+        }
+
         TableView {
             id: table
 
@@ -51,12 +69,10 @@ Rectangle {
             model: paths.events
 
             columnWidthProvider: (column) => {
-                return [100, 500, 100, 100][column]
+                return [300, 500, 300, 500][column]
             }
 
             delegate: Rectangle {
-
-
                 color: "transparent"
 
                 border {
@@ -66,6 +82,12 @@ Rectangle {
 
                 Items.RText {
                     text: display
+                }
+            }
+
+            Behavior on height {
+                PropertyAnimation {
+                    duration: 50
                 }
             }
         }
