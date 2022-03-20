@@ -62,3 +62,17 @@ void EventModel::insert(const EventModelItem &item) {
     qCInfo(eventModel) << "Inserted event -" << "events:" << rowCount();
 }
 
+void EventModel::clear() {
+    if (not rowCount()) {
+        qCWarning(eventModel) << "Nothing to clear";
+
+        return;
+    }
+
+    beginResetModel();
+    m_events.clear();
+    endResetModel();
+
+    qCInfo(eventModel) << "Model cleared";
+}
+

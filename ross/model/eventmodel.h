@@ -55,6 +55,8 @@ public:
 
     void insert(const EventModelItem &);
 
+    Q_INVOKABLE void clear();
+
 private:
     static const QHash<int, QByteArray> ROLE_NAMES;
 

@@ -40,7 +40,7 @@ Item {
         Buttons {
             Layout.alignment: Qt.AlignHCenter
 
-            onClear: console.log("Clear")
+            onClear: paths.events.clear()
             onStart: console.log("Start")
         }
     }
