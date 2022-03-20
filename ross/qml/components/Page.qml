@@ -36,5 +36,12 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
+
+        Buttons {
+            Layout.alignment: Qt.AlignHCenter
+
+            onClear: console.log("Clear")
+            onStart: console.log("Start")
+        }
     }
 }

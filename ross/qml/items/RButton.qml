@@ -12,6 +12,8 @@ Button {
         text: root.text
         font: root.font
 
+        horizontalAlignment: Text.AlignHCenter
+
         color: RossStyles.textColor
     }
 
