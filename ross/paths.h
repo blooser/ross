@@ -17,7 +17,8 @@ public:
 
     QObject* watching();
 
-    Q_INVOKABLE void watch(const QUrl &url);
+    Q_INVOKABLE void watch(const QString &url);
+    Q_INVOKABLE void unwatch(const QString& url);
 
 signals:
     void watchingChanged(QObject*);

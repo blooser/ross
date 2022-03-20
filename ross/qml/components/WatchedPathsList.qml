@@ -31,6 +31,9 @@ Rectangle {
         }
 
         Items.RText {
+            Layout.fillWidth: true
+
+            horizontalAlignment: Text.AlignHCenter
             text: "Watched paths"
 
         }
@@ -45,13 +48,11 @@ Rectangle {
             spacing: 5
 
             delegate: WatchedPathListItem {
-                width: list.width // FIXME: Without this sizing is ridiculous.
+                width: list.width // NOTE: Without this, sizing is ridiculous...
 
                 path: watchedPath
 
-                onRemove: {
-                    console.log("Remove", path)
-                }
+                onRemove: paths.unwatch(path)
             }
         }
     }

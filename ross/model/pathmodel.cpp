@@ -26,5 +26,5 @@ void PathModel::insert(const QString &path) {
     m_paths.append(path);
     endInsertRows();
 
-    qCInfo(pathModel) << "Inserted:" << path << "Size: " << rowCount();
+    qCInfo(pathModel) << "Inserted path -" << "paths:" << rowCount();
 }

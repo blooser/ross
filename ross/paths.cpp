@@ -11,12 +11,16 @@ Paths::Paths(QObject *parent)
 
 }
 
-void Paths::watch(const QUrl &url) {
+void Paths::watch(const QString &url) {
     qCInfo(paths) << "Watching: " << url;
 
-    m_pathModel.insert(url.path());
+    m_pathModel.insert(url);
 
     emit watchingChanged(&m_pathModel);
+}
+
+void Paths::unwatch(const QString &url) {
+    qCInfo(paths) << "Unwatching: " << url;
 }
 
 QObject* Paths::watching() {

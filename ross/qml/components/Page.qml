@@ -23,6 +23,7 @@ Item {
             Layout.alignment: Qt.AlignHCenter
 
             onPathSelected: paths.watch(path)
+
         }
 
         WatchedPathsList {
@@ -30,6 +31,5 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
-
     }
 }
