@@ -28,6 +28,7 @@ void FolderChanges::scanDirectory(const QString &path) {
 
     scanCreated(files);
     scanDeleted(files);
+    scanEdited(files);
 }
 
 void FolderChanges::scanCreated(QList<QFileInfo> files) {
@@ -46,6 +47,20 @@ void FolderChanges::scanDeleted(QList<QFileInfo> files) {
             emit newEvent(EventModel::EventModelItem("Deleted", file.absoluteFilePath(), false));
 
             m_files.removeOne(file);
+        }
+    }
+}
+
+void FolderChanges::scanEdited(QList<QFileInfo> files) {
+    for (const auto &file : qAsConst(m_files)) {
+        const int index = files.indexOf(file);
+
+        if (index >= 0) {
+            const auto target_file = files.at(index);
+
+            if (file.size() != target_file.size()) {
+                emit newEvent(EventModel::EventModelItem("Edited", file.absoluteFilePath(), false));
+            }
         }
     }
 }

@@ -69,11 +69,13 @@ Rectangle {
             model: paths.events
 
             columnWidthProvider: (column) => {
-                return [300, 500, 300, 500][column]
+                return [300, 800, 300, 500][column]
             }
 
             delegate: Rectangle {
                 color: "transparent"
+
+                clip: true
 
                 border {
                     width: 1
