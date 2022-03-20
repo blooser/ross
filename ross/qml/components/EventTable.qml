@@ -31,10 +31,8 @@ Rectangle {
             margins: 10
         }
 
-        Items.RText {
+        Header {
             Layout.fillWidth: true
-
-            horizontalAlignment: Text.AlignHCenter
 
             text: "Events"
         }

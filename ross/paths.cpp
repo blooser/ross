@@ -25,6 +25,12 @@ Paths::Paths(QObject *parent)
 void Paths::watch(const QString &url) {
     const auto clean = clean_path(url);
 
+    if (m_pathModel.contains(clean.path)) {
+        qCWarning(paths) << clean.path << "is readly watched";
+
+        return;
+    }
+
     auto pathWatcher = std::unique_ptr<FolderChanges>(new FolderChanges(clean.path));
 
     connect(pathWatcher.get(), &FolderChanges::newEvent,

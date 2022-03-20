@@ -19,9 +19,5 @@ Item {
             margins: 5
         }
 
-
-
-
-
     }
 }

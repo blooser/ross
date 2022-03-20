@@ -2,6 +2,18 @@
 
 Q_LOGGING_CATEGORY(eventModel, "event.model")
 
+EventModel::EventModelItem EventModel::EventModelItem::Created(const QString path, bool folder) {
+    return EventModel::EventModelItem("Created", path, folder);
+};
+
+EventModel::EventModelItem EventModel::EventModelItem::Deleted(const QString path, bool folder) {
+    return EventModel::EventModelItem("Deleted", path, folder);
+};
+
+EventModel::EventModelItem EventModel::EventModelItem::Edited(const QString path, bool folder) {
+    return EventModel::EventModelItem("Edited", path, folder);
+};
+
 const QHash<int, QByteArray> EventModel::ROLE_NAMES = {
     { Column::Event, QByteArrayLiteral("event") },
     { Column::Path, QByteArrayLiteral("path") },

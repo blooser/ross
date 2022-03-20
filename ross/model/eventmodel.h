@@ -35,6 +35,10 @@ public:
 
             }
 
+            static EventModelItem Created(const QString path, bool folder);
+            static EventModelItem Deleted(const QString path, bool folder);
+            static EventModelItem Edited(const QString path, bool folder);
+
             QVariant operator[](const int role) {
                 switch (static_cast<Column>(role)) {
                     case Column::Event:

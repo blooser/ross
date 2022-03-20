@@ -44,3 +44,7 @@ void PathModel::remove(const QString &path) {
 
     qCInfo(pathModel) << "Removed path -" << "paths:" << rowCount();
 }
+
+bool PathModel::contains(const QString &path) {
+    return m_paths.contains(path);
+}

@@ -34,7 +34,7 @@ void FolderChanges::scanDirectory(const QString &path) {
 void FolderChanges::scanCreated(QList<QFileInfo> files) {
     for (const auto &file : qAsConst(files)) {
         if (!m_files.contains(file)) {
-            emit newEvent(EventModel::EventModelItem("Created", file.absoluteFilePath(), file.isDir()));
+            emit newEvent(EventModel::EventModelItem::Created(file.absoluteFilePath(), file.isDir()));
 
             m_files.append(file);
         }
@@ -44,7 +44,7 @@ void FolderChanges::scanCreated(QList<QFileInfo> files) {
 void FolderChanges::scanDeleted(QList<QFileInfo> files) {
     for (const auto &file : qAsConst(m_files)) {
         if (!files.contains(file)) {
-            emit newEvent(EventModel::EventModelItem("Deleted", file.absoluteFilePath(), file.isDir()));
+            emit newEvent(EventModel::EventModelItem::Deleted(file.absoluteFilePath(), file.isDir()));
 
             m_files.removeOne(file);
         }
@@ -59,14 +59,8 @@ void FolderChanges::scanEdited(QList<QFileInfo> files) {
             const auto target_file = files.at(index);
 
             if (file.size() != target_file.size()) {
-                emit newEvent(EventModel::EventModelItem("Edited", file.absoluteFilePath(), file.isDir()));
+                emit newEvent(EventModel::EventModelItem::Edited(file.absoluteFilePath(), file.isDir()));
             }
         }
     }
 }
-
-
-
-
-
-

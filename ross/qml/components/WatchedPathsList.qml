@@ -29,12 +29,9 @@ Rectangle {
             margins: 5
         }
 
-        Items.RText {
+        Header {
             Layout.fillWidth: true
-
-            horizontalAlignment: Text.AlignHCenter
             text: "Watched paths"
-
         }
 
         ListView {

@@ -20,6 +20,7 @@ public:
 
     void insert(const QString &path);
     void remove(const QString &path);
+    bool contains(const QString &path);
 
 private:
     QStringList m_paths;
