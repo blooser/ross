@@ -2,6 +2,7 @@
 #define PATHS_H
 
 #include <QObject>
+#include <QFileSystemWatcher>
 
 #include "model/pathmodel.h"
 
@@ -12,6 +13,7 @@ Q_DECLARE_LOGGING_CATEGORY(paths)
 class Paths : public QObject {
     Q_OBJECT
     Q_PROPERTY(QObject* watching READ watching NOTIFY watchingChanged)
+
 public:
     Paths(QObject *parent=nullptr);
 
@@ -25,6 +27,8 @@ signals:
 
 private:
     PathModel m_pathModel;
+    QFileSystemWatcher m_watcher;
+
 };
 
 #endif // PATHS_H

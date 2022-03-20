@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import Qt.labs.platform 1.1
+import QtQuick.Dialogs 1.3
 
 import "../items" as Items
 
@@ -10,11 +10,13 @@ Items.RButton {
 
     signal pathSelected(url path);
 
-    FolderDialog {
+    FileDialog {
         id: dialog
 
-        title: "Choose path to watch"
+        title: "Select path to watch"
 
-        onAccepted: root.pathSelected(dialog.folder)
+        selectFolder: true
+
+        onAccepted: root.pathSelected(dialog.fileUrl)
     }
 }
