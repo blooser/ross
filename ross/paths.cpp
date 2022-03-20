@@ -23,7 +23,7 @@ void Paths::watch(const QString &url) {
     const auto clean = clean_path(url);
 
     if (!m_watcher.addPath(clean.path)) {
-        qCWarning(paths) << "Failed to watch: " << url;
+        qCWarning(paths) << "Failed to watch: " << clean.path;
 
         return;
     }
@@ -32,7 +32,7 @@ void Paths::watch(const QString &url) {
 
     emit watchingChanged(&m_pathModel);
 
-    qCInfo(paths) << "Watching: " << url;
+    qCInfo(paths) << "Watching: " << clean.path;
 }
 
 void Paths::unwatch(const QString &url) {
@@ -44,7 +44,9 @@ void Paths::unwatch(const QString &url) {
         return;
     }
 
-     qCInfo(paths) << "Unwatching: " << url;
+    m_pathModel.remove(clean.path);
+
+    qCInfo(paths) << "Unwatching: " << clean.path;
 }
 
 QObject* Paths::watching() {

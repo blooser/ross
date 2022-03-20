@@ -52,7 +52,7 @@ Rectangle {
 
                 path: watchedPath
 
-                onRemove: paths.unwatch(path)
+                onRemove: paths.unwatch(watchedPath) // NOTE: Use delegate item's value to get maximum compatibility
             }
         }
     }

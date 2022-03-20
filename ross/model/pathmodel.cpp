@@ -28,3 +28,19 @@ void PathModel::insert(const QString &path) {
 
     qCInfo(pathModel) << "Inserted path -" << "paths:" << rowCount();
 }
+
+void PathModel::remove(const QString &path) {
+    const int row = m_paths.indexOf(path);
+
+    if (row == -1) {
+        qCWarning(pathModel) << "Failed to find row of" << path;
+
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), row, row);
+    m_paths.removeAt(row);
+    endRemoveRows();
+
+     qCInfo(pathModel) << "Removed path -" << "paths:" << rowCount();
+}

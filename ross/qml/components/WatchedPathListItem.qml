@@ -9,7 +9,7 @@ Item {
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
 
-    property string path: ""
+    property url path: undefined
 
     signal remove(url path)
 

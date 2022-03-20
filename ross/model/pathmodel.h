@@ -19,6 +19,7 @@ public:
     int rowCount(const QModelIndex &index=QModelIndex()) const override;
 
     void insert(const QString &path);
+    void remove(const QString &path);
 
 private:
     QStringList m_paths;
