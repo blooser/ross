@@ -8,6 +8,7 @@
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(eventModel)
 
+
 class EventModel : public QAbstractTableModel {
     Q_OBJECT
 
@@ -21,28 +22,43 @@ public:
         Last
     };
 
-    struct EventModelItem {
-        QString event;
-        QString path;
-        bool folder;
-        QDateTime dateTime;
+    class EventModelItem {
+        public:
+            EventModelItem(const QString event,
+                           const QString path,
+                           bool folder,
+                           const QDateTime dateTime = QDateTime::currentDateTime())
+                : m_event(event),
+                  m_path(path),
+                  m_folder(folder),
+                  m_dateTime(dateTime) {
 
-        QVariant operator[](const int role) {
-            switch (static_cast<Column>(role)) {
-                case Column::Event:
-                    return event;
-                case Column::Path:
-                    return path;
-                case Column::Folder:
-                    return folder;
-                case Column::DateTime:
-                    return dateTime;
-                default:
-                    return QVariant();
             }
 
-            return QVariant();
-        };
+            QVariant operator[](const int role) {
+                switch (static_cast<Column>(role)) {
+                    case Column::Event:
+                        return m_event;
+                    case Column::Path:
+                        return m_path;
+                    case Column::Folder:
+                        return m_folder;
+                    case Column::DateTime:
+                        return m_dateTime;
+                    default:
+                        return QVariant();
+                }
+
+                return QVariant();
+            };
+
+            friend class EventModel;
+
+        private:
+            QString m_event;
+            QString m_path;
+            bool m_folder;
+            QDateTime m_dateTime;
     };
 
 

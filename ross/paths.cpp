@@ -6,12 +6,6 @@
 
 Q_LOGGING_CATEGORY(paths, "paths");
 
-Paths::Paths(QObject *parent)
-    : QObject(parent) {
-
-    connect(&m_watcher, &QFileSystemWatcher::directoryChanged,
-            this, &Paths::handleFileChanged);
-}
 
 struct clean_path {
     clean_path(const QString &url) : path(url) {
@@ -21,49 +15,54 @@ struct clean_path {
     QString path;
 };
 
+
+Paths::Paths(QObject *parent)
+    : QObject(parent) {
+
+}
+
+// NOTE: We can suppose that the `url` argument will be always a path to folder
 void Paths::watch(const QString &url) {
     const auto clean = clean_path(url);
 
-    if (!m_watcher.addPath(clean.path)) {
-        qCWarning(paths) << "Failed to watch: " << clean.path;
+    auto pathWatcher = std::unique_ptr<FolderChanges>(new FolderChanges(clean.path));
 
-        return;
-    }
+    connect(pathWatcher.get(), &FolderChanges::newEvent,
+            this, &Paths::handleEvent);
 
     m_pathModel.insert(clean.path);
 
-    emit watchingChanged(&m_pathModel);
+    m_watchers.push_back(std::move(pathWatcher));
 
-    qCInfo(paths) << "Watching: " << clean.path;
+    qCInfo(paths) << "Watching" << clean.path;
 }
 
 void Paths::unwatch(const QString &url) {
     const auto clean = clean_path(url);
 
-    if (!m_watcher.removePath(clean.path)) {
-        qCWarning(paths) << "Failed to unwatch: " << url;
+    const auto it = std::find_if(m_watchers.begin(), m_watchers.end(), [path=clean.path](std::unique_ptr<FolderChanges> &watcher) {
+        return (*watcher).path() == path;
+    });
 
-        return;
+    if (it != m_watchers.end()) {
+        m_watchers.erase(it);
+
+        qCInfo(paths) << "Removed watcher";
     }
 
     m_pathModel.remove(clean.path);
 
-    qCInfo(paths) << "Unwatching: " << clean.path;
+    qCInfo(paths) << "Unwatching" << clean.path;
 }
 
 QObject* Paths::watching() {
     return &m_pathModel;
 }
 
-void Paths::handleFileChanged(const QString &path) {
-    qCInfo(paths) << path << "changed";
+void Paths::handleEvent(const EventModel::EventModelItem &event) {
+    qCInfo(paths) << "new event";
 
-    m_eventModel.insert(EventModel::EventModelItem{
-                            "created",
-                            path,
-                            true,
-                            QDateTime::currentDateTime()
-                        });
+    m_eventModel.insert(event);
 }
 
 QObject* Paths::events() {

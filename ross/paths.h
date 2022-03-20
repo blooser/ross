@@ -1,11 +1,15 @@
 #ifndef PATHS_H
 #define PATHS_H
 
+#include <memory>
+
 #include <QObject>
 #include <QFileSystemWatcher>
 
 #include "model/pathmodel.h"
 #include "model/eventmodel.h"
+
+#include "pathwatcher.h"
 
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(paths)
@@ -30,14 +34,13 @@ signals:
     void eventsChanged(QObject*);
 
 private slots:
-    void handleFileChanged(const QString& path);
+    void handleEvent(const EventModel::EventModelItem&);
 
 private:
     PathModel m_pathModel;
     EventModel m_eventModel;
 
-    QFileSystemWatcher m_watcher;
-
+    std::vector<std::unique_ptr<FolderChanges>> m_watchers;
 };
 
 #endif // PATHS_H

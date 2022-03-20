@@ -37,18 +37,17 @@ QVariant EventModel::data(const QModelIndex &index, int role) const {
 
     switch (role) {
         case Column::Event:
-            return item.event;
+            return item.m_event;
         case Column::Path:
-            return item.path;
+            return item.m_path;
         case Column::Folder:
-            return item.folder;
+            return item.m_folder;
         case Column::DateTime:
-            return item.dateTime;
+            return item.m_dateTime;
         case Qt::DisplayRole:
             return item[Qt::UserRole + 1 + index.column()];
         default:
             return QVariant();
-
     }
 
     return QVariant();
@@ -73,6 +72,6 @@ void EventModel::clear() {
     m_events.clear();
     endResetModel();
 
-    qCInfo(eventModel) << "Model cleared";
+    qCInfo(eventModel) << "Model has been cleared";
 }
 
