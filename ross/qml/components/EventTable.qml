@@ -71,6 +71,8 @@ Rectangle {
                 return [300, 800, 300, 500][column]
             }
 
+            boundsBehavior: Flickable.StopAtBounds
+
             delegate: Rectangle {
                 color: "transparent"
 
@@ -83,12 +85,6 @@ Rectangle {
 
                 Items.RText {
                     text: display
-                }
-            }
-
-            Behavior on height {
-                PropertyAnimation {
-                    duration: 50
                 }
             }
         }

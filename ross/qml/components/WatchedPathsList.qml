@@ -40,8 +40,22 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
+            boundsBehavior: Flickable.StopAtBounds
+
             model: paths.watched
             spacing: 5
+
+            add: Transition {
+                OpacityAnimator {
+                    from: 0; to: 1; duration: 250
+                }
+            }
+
+            remove: Transition {
+                OpacityAnimator {
+                    from: 1; to: 0; duration: 250
+                }
+            }
 
             delegate: WatchedPathListItem {
                 width: list.width // NOTE: Without this, sizing is ridiculous...

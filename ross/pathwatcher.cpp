@@ -9,7 +9,7 @@ Q_LOGGING_CATEGORY(folderChanges, "folder.changes")
 FolderChanges::FolderChanges(const QString &path, QObject *parent)
     : QObject(parent),
       m_path(path),
-      m_files(QDir(m_path).entryInfoList(QDir::Files)) {
+      m_files(QDir(m_path).entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot)) {
 
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged,
             this, &FolderChanges::scanDirectory);
@@ -24,7 +24,7 @@ const QString FolderChanges::path() {
 }
 
 void FolderChanges::scanDirectory(const QString &path) {
-    const auto files = QDir(path).entryInfoList(QDir::Files);
+    const auto files = QDir(path).entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
 
     scanCreated(files);
     scanDeleted(files);
