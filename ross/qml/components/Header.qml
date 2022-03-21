@@ -24,12 +24,15 @@ Item {
 
             horizontalAlignment: Text.AlignHCenter
 
+            style: Text.Sunken
+            styleColor: RossStyles.styleColor
+
             text: root.text
         }
 
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 1
+            Layout.preferredHeight: RossStyles.lineWidth
 
             color: RossStyles.activeColor
         }

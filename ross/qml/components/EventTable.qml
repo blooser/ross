@@ -15,11 +15,11 @@ Rectangle {
     implicitHeight: layout.implicitHeight
 
     border {
-        width: 1
+        width: RossStyles.lineWidth
         color: RossStyles.activeColor
     }
 
-    radius: 10
+    radius: RossStyles.normalMargin
 
     color: "transparent"
 
@@ -28,7 +28,7 @@ Rectangle {
 
         anchors {
             fill: parent
-            margins: 10
+            margins: RossStyles.normalMargin
         }
 
         Header {
@@ -61,8 +61,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            columnSpacing: 1
-            rowSpacing: 1
+            columnSpacing: RossStyles.lineWidth
+            rowSpacing: RossStyles.lineWidth
             clip: true
 
             model: paths.events
@@ -79,7 +79,7 @@ Rectangle {
                 clip: true
 
                 border {
-                    width: 1
+                    width: RossStyles.lineWidth
                     color: RossStyles.firstColor
                 }
 

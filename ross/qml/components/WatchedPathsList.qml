@@ -12,10 +12,10 @@ Rectangle {
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
 
-    radius: 10
+    radius: RossStyles.smallMargin
 
     border {
-        width: 1
+        width: RossStyles.lineWidth
         color: RossStyles.activeColor
     }
 
@@ -26,7 +26,7 @@ Rectangle {
 
         anchors {
             fill: root
-            margins: 5
+            margins: RossStyles.smallMargin
         }
 
         Header {
@@ -43,7 +43,7 @@ Rectangle {
             boundsBehavior: Flickable.StopAtBounds
 
             model: paths.watched
-            spacing: 5
+            spacing: RossStyles.smallMargin
 
             add: Transition {
                 OpacityAnimator {

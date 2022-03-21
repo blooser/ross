@@ -10,7 +10,6 @@
         <file>components/WatchedPathsList.qml</file>
         <file>components/WatchedPathListItem.qml</file>
         <file>components/EventTable.qml</file>
-        <file>components/EventTableItem.qml</file>
         <file>components/Buttons.qml</file>
         <file>components/Header.qml</file>
         <file>components/SwitchButton.qml</file>

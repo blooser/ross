@@ -11,16 +11,12 @@ Item {
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
 
-    signal clear()
-    signal stop()
-    signal start()
-
     RowLayout {
         id: layout
 
         anchors {
             fill: parent
-            margins: 5
+            margins: RossStyles.smallMargin
         }
 
         Items.RButton {
@@ -28,7 +24,7 @@ Item {
 
             text: "Clear"
 
-            onClicked: root.clear()
+            onClicked: paths.events.clear()
         }
 
         SwitchButton {

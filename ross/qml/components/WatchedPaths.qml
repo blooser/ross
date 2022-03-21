@@ -3,6 +3,9 @@ import QtQuick.Layouts 1.15
 
 import "../items" as Items
 
+import ross.styles 0.1
+
+
 Item {
     id: root
 
@@ -12,11 +15,11 @@ Item {
     ColumnLayout {
         id: mainLayout
 
-        spacing: 5
+        spacing: RossStyles.smallMargin
 
         anchors {
             fill: parent
-            margins: 5
+            margins: RossStyles.smallMargin
         }
 
     }

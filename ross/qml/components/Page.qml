@@ -3,13 +3,15 @@ import QtQuick.Layouts 1.15
 
 import "../items" as Items
 
+import ross.styles 0.1
+
 Item {
     implicitWidth: mainLayout.implicitWidth
     implicitHeight: mainLayout.implicitHeight
 
     anchors {
         fill: parent
-        margins: 25
+        margins: RossStyles.bigMargin
     }
 
     ColumnLayout {
@@ -17,7 +19,7 @@ Item {
 
         anchors.fill: parent
 
-        spacing: 20
+        spacing: RossStyles.bigMargin
 
         PathButton {
             Layout.alignment: Qt.AlignHCenter
@@ -39,9 +41,6 @@ Item {
 
         Buttons {
             Layout.alignment: Qt.AlignHCenter
-
-            onClear: paths.events.clear()
-            onStart: console.log("Start")
         }
     }
 }

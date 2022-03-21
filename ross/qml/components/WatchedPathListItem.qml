@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
+import ross.styles 0.1
+
 import "../items" as Items
 
 Item {
@@ -18,7 +20,7 @@ Item {
 
         anchors {
             fill: parent
-            margins: 5
+            margins: RossStyles.smallMargin
         }
 
         Items.RText {
