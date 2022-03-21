@@ -9,7 +9,7 @@
 #include "model/pathmodel.h"
 #include "model/eventmodel.h"
 
-#include "pathwatcher.h"
+#include "folderchanges.h"
 
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(paths)
@@ -40,14 +40,14 @@ signals:
     void watchingChanged(bool);
 
 private slots:
-    void handleEvent(const EventModel::EventModelItem&);
+    void handleChange(const EventModel::EventModelItem&);
 
 private:
     PathModel m_pathModel;
     EventModel m_eventModel;
     bool m_watching;
 
-    std::vector<std::unique_ptr<FolderChanges>> m_watchers;
+    std::vector<std::unique_ptr<FolderChanges>> m_folderChanges;
 };
 
 #endif // PATHS_H

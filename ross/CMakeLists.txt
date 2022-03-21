@@ -19,7 +19,7 @@ add_definitions(-DPROJECT_NAME="Ross"
                 -DORGANIZATION_DOMAIN="https://github.com/blooser"
                 )
 
-add_executable(ross main.cpp paths.h paths.cpp pathwatcher.h pathwatcher.cpp ${MODEL_FILES} ${QRC_FILES})
+add_executable(ross main.cpp paths.h paths.cpp folderchanges.h folderchanges.cpp ${MODEL_FILES} ${QRC_FILES})
 
 target_link_libraries(ross
                       Qt5::Core

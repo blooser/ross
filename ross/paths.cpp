@@ -32,14 +32,14 @@ void Paths::watch(const QString &url) {
         return;
     }
 
-    auto pathWatcher = std::unique_ptr<FolderChanges>(new FolderChanges(clean.path));
+    auto folderChanges = std::unique_ptr<FolderChanges>(new FolderChanges(clean.path));
 
-    connect(pathWatcher.get(), &FolderChanges::newEvent,
-            this, &Paths::handleEvent);
+    connect(folderChanges.get(), &FolderChanges::newChange,
+            this, &Paths::handleChange);
 
     m_pathModel.insert(clean.path);
 
-    m_watchers.push_back(std::move(pathWatcher));
+    m_folderChanges.push_back(std::move(folderChanges));
 
     qCInfo(paths) << "Watching" << clean.path;
 }
@@ -47,12 +47,12 @@ void Paths::watch(const QString &url) {
 void Paths::unwatch(const QString &url) {
     const auto clean = clean_path(url);
 
-    const auto it = std::find_if(m_watchers.begin(), m_watchers.end(), [path=clean.path](std::unique_ptr<FolderChanges> &watcher) {
+    const auto it = std::find_if(m_folderChanges.begin(), m_folderChanges.end(), [path=clean.path](std::unique_ptr<FolderChanges> &watcher) {
         return (*watcher).path() == path;
     });
 
-    if (it != m_watchers.end()) {
-        m_watchers.erase(it);
+    if (it != m_folderChanges.end()) {
+        m_folderChanges.erase(it);
 
         qCInfo(paths) << "Removed watcher";
     }
@@ -66,7 +66,7 @@ QObject* Paths::watched() {
     return &m_pathModel;
 }
 
-void Paths::handleEvent(const EventModel::EventModelItem &event) {
+void Paths::handleChange(const EventModel::EventModelItem &event) {
     if (not m_watching) {
         // NOTE: Block all events
         return;

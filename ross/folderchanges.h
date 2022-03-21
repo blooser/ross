@@ -1,5 +1,5 @@
-#ifndef PATHWATCHER_H
-#define PATHWATCHER_H
+#ifndef FOLDERCHANGES_H
+#define FOLDERCHANGES_H
 
 #include "model/eventmodel.h"
 
@@ -21,7 +21,7 @@ public:
     const QString path();
 
 signals:
-    void newEvent(const EventModel::EventModelItem&);
+    void newChange(const EventModel::EventModelItem&);
 
 private slots:
     void scanDirectory(const QString &path);
@@ -40,4 +40,4 @@ private:
 
 };
 
-#endif // PATHWATCHER_H
+#endif // FOLDERCHANGES_H
