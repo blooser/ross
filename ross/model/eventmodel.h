@@ -32,7 +32,6 @@ public:
                   m_path(path),
                   m_folder(folder),
                   m_dateTime(dateTime) {
-
             }
 
             static EventModelItem Created(const QString path, bool folder);

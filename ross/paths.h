@@ -21,7 +21,6 @@ class Paths : public QObject {
     Q_PROPERTY(QObject* events READ events NOTIFY eventsChanged)
     Q_PROPERTY(bool watching READ watching WRITE setWatching NOTIFY watchingChanged)
 
-
 public:
     Paths(QObject *parent=nullptr);
 

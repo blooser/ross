@@ -27,7 +27,7 @@ void Paths::watch(const QString &url) {
     const auto clean = clean_path(url);
 
     if (m_pathModel.contains(clean.path)) {
-        qCWarning(paths) << clean.path << "is readly watched";
+        qCWarning(paths) << clean.path << "is already watched";
 
         return;
     }
@@ -54,7 +54,7 @@ void Paths::unwatch(const QString &url) {
     if (it != m_folderChanges.end()) {
         m_folderChanges.erase(it);
 
-        qCInfo(paths) << "Removed watcher";
+        qCInfo(paths) << "Removed folder";
     }
 
     m_pathModel.remove(clean.path);
