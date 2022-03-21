@@ -4,7 +4,6 @@
         <file>items/RButton.qml</file>
         <file>components/Page.qml</file>
         <file>RossStyles.qml</file>
-        <file>components/WatchedPaths.qml</file>
         <file>items/RText.qml</file>
         <file>components/PathButton.qml</file>
         <file>components/WatchedPathsList.qml</file>
