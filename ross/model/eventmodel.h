@@ -48,7 +48,7 @@ public:
                     case Column::Folder:
                         return m_folder;
                     case Column::DateTime:
-                        return m_dateTime;
+                        return m_dateTime.toString("dd/MM/yyyy HH:mm");
                     default:
                         return QVariant();
                 }
